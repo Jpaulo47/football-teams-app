@@ -45,7 +45,8 @@ export default function TeamsPage() {
   const fetchTeams = async () => {
     setLoading(true)
     try {
-      const Parse = require("parse")
+      // Importar Parse dinamicamente para evitar problemas de SSR
+      const Parse = require("parse/dist/parse.min.js")
       const query = new Parse.Query("Team")
       const results = await query.find()
 
@@ -69,7 +70,7 @@ export default function TeamsPage() {
   // Adicionar um novo time
   const addTeam = async () => {
     try {
-      const Parse = require("parse")
+      const Parse = require("parse/dist/parse.min.js")
       const Team = Parse.Object.extend("Team")
       const team = new Team()
 
@@ -100,7 +101,7 @@ export default function TeamsPage() {
     if (!editingTeam?.objectId) return
 
     try {
-      const Parse = require("parse")
+      const Parse = require("parse/dist/parse.min.js")
       const query = new Parse.Query("Team")
       const team = await query.get(editingTeam.objectId)
 
@@ -126,7 +127,7 @@ export default function TeamsPage() {
     if (!confirm("Tem certeza que deseja excluir este time?")) return
 
     try {
-      const Parse = require("parse")
+      const Parse = require("parse/dist/parse.min.js")
       const query = new Parse.Query("Team")
       const team = await query.get(id)
 
